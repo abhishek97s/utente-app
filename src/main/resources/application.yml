@@ -1,3 +1,35 @@
 server:
-  port: 9001
+  port: 9090
   
+spring:
+  application:
+      name: USER-SERVICE
+  profiles:
+    active:
+    - dev
+---
+
+spring:
+    profiles: dev     
+    cloud:
+      discovery:
+        enabled: true
+      config:
+        import-check:
+          enabled: false
+    datasource:
+        password: admin
+        platform: postgres
+        url: jdbc:postgresql://localhost:5432/dcbapp
+        username: postgres
+    jpa:
+        database: POSTGRESQL
+        generate-ddl: true
+        hibernate:
+            ddl-auto: update
+        properties:
+            hibernate:
+                jdbc:
+                    lob:
+                        non_contextual_creation: true
+        show-sql: true     
